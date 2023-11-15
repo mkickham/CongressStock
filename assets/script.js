@@ -13,47 +13,72 @@ const apiUrl3 = 'https://senate-stock-watcher-data.s3-us-west-2.amazonaws.com/ag
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
+const submitForm = document.getElementById('submit-form')
 
-fetch(apiUrl1, {
-    method: 'GET',
-    header: {
-        'Authorization': `Bearer ${apiKey1}`
+submitForm.addEventListener('submit', async function(event){
+    event.preventDefault();
+    const searchStock = document.getElementById('search').value
+    const searchPpl = document.getElementById('searchPpl').value
+    const apiURL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${searchStock}&apikey=${apiKey1}`
+    try {
+        const response = await fetch(apiURL)
+        const data = await response.json()
+        console.log(data)
+        const houseResponse = await fetch(apiUrl2)
+        const houseData = await houseResponse.json()
+        console.log(houseData);
+        const filterHouse = houseData.filter(function(item){
+            return (item.representative.toLowerCase() === searchPpl.toLowerCase().trim())
+        })
+        console.log(filterHouse);
+        //const congressResponse = await fetch(apiUrl3)
+        //const congressData = await congressResponse.json()
+    } catch (error) {
+        console.log('error', error);
     }
-})
-    
-.then (Response => Response.json())
-.then (data => {
-     console.log(data);
-})
-.catch (console => {
-    console.error('Error', error);
-});
 
-fetch(apiUrl2, {
-    method: 'GET',
 })
-    
-.then (Response => Response.json())
-.then (data => {
-     console.log(data);
-})
-.catch (console => {
-    console.error('Error', error);
-});
 
-fetch(apiUrl3, {
-    method: 'GET',
-})
+// fetch(apiUrl1, {
+//     method: 'GET',
+//     header: {
+//         'Authorization': `Bearer ${apiKey1}`
+//     }
+// })
     
-.then (Response => Response.json())
-.then (data => {
-     console.log(data);
-})
-.catch (console => {
-    console.error('Error', error);
-});
+// .then (Response => Response.json())
+// .then (data => {
+//      console.log(data);
+// })
+// .catch (console => {
+//     console.error('Error', error);
+// });
 
-function searchCong(){
-    console.log(data)
-    var congress = document.getElementById('');
-}
+// fetch(apiUrl2, {
+//     method: 'GET',
+// })
+    
+// .then (Response => Response.json())
+// .then (data => {
+//      console.log(data);
+// })
+// .catch (console => {
+//     console.error('Error', error);
+// });
+
+// fetch(apiUrl3, {
+//     method: 'GET',
+// })
+    
+// .then (Response => Response.json())
+// .then (data => {
+//      console.log(data);
+// })
+// .catch (console => {
+//     console.error('Error', error);
+// });
+
+// function searchCong(){
+//     console.log(data)
+//     var congress = document.getElementById('');
+// }
