@@ -7,7 +7,7 @@ const apiKey2 = 'KEY HERE'
 const apiUrl2 = 'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json'
 
 // The Senate
-const apiKey3 = 'LEY HERE'
+const apiKey3 = 'KEY HERE'
 const apiUrl3 = 'https://senate-stock-watcher-data.s3-us-west-2.amazonaws.com/aggregate/all_transactions.json'
 
 const searchButton = document.getElementById('searchButton');
@@ -52,3 +52,8 @@ fetch(apiUrl3, {
 .catch (console => {
     console.error('Error', error);
 });
+
+function searchCong(){
+    console.log(data)
+    var congress = document.getElementById('');
+}
